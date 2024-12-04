@@ -1,6 +1,18 @@
 {
   "name": "prod-package-json",
-  "version": "1.0.0",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuzhi1900/prod-package-json"
+  },
+  "keywords": [
+    "prod",
+    "production",
+    "package",
+    "prod-package-json"
+  ],
+  "author": "Bert Huang",
+  "license": "MIT",
   "module": "index.js",
   "type": "module",
   "devDependencies": {
