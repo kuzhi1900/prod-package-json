@@ -1,0 +1,6 @@
+.idea
+node_modules
+.gitignore
+.npmignore
+bun.lockb
+jsconfig.json
