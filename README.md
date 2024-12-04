@@ -3,13 +3,12 @@ This library can help minify the package.json file when building the production 
 
 ### Usage
 ```js
-import {ProdPackageJson} from 'prod-package-json'
+import prodJson from 'prod-package-json'
 
-const prodPackage = new ProdPackageJson({
-        sourcePath = './package.json',
-        targetDir = './dist',
-    });
-prodPackage.convert({
+
+prodJson.save({
+  sourcePath = './package.json',
+  targetDir = './dist',
   fields: ['devDependencies'],
   scripts: {
     'start': 'node ./dist/index.js'

@@ -1,16 +1,12 @@
-export class ProdPackageJson {
-    constructor({ 
-        sourcePath = './package.json',
-        targetDir = './dist',
-    } = {}) {
-        this.sourcePath = sourcePath;
-        this.targetDir = targetDir;
+import fs from  'fs';
+class ProdPackageJson {
+    constructor({} = {}) {
         this.packageJson = null;
     }
 
     // 读取并解析 package.json
-    read() {
-        this.packageJson = JSON.parse(fs.readFileSync(this.sourcePath, 'utf-8'));
+    read(sourcePath) {
+        this.packageJson = JSON.parse(fs.readFileSync(sourcePath, 'utf-8'));
         return this;
     }
 
@@ -29,40 +25,38 @@ export class ProdPackageJson {
     }
 
     // 确保目标目录存在
-    ensureTargetDir() {
-        if (!fs.existsSync(this.targetDir)) {
-            fs.mkdirSync(this.targetDir, { recursive: true });
+    ensureTargetDir(targetDir) {
+        if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, {recursive: true});
         }
         return this;
     }
 
     // 写入处理后的 package.json
-    write() {
+    write(targetDir) {
         fs.writeFileSync(
-            `${this.targetDir}/package.json`,
+            `${targetDir}/package.json`,
             JSON.stringify(this.packageJson, null, 2),
             'utf-8'
         );
-        console.log('✓ Generated production package.json in dist directory');
+        console.log(`✓ Generated production package.json in ${targetDir} directory`);
         return this;
     }
 
     // 执行整个处理流程
-    convert({ fields = ['devDependencies'], scripts = {} } = {}) {
+    save({
+             sourcePath = './package.json',
+             targetDir = './dist',
+             fields = ['devDependencies'],
+             scripts = {}
+         } = {}) {
         return this
-            .read()
+            .read(sourcePath)
             .cleanFields(fields)
             .updateScripts(scripts)
-            .ensureTargetDir()
-            .write();
+            .ensureTargetDir(targetDir)
+            .write(targetDir);
     }
 }
 
-// usage
-const prodPackage = new ProdPackageJson();
-prodPackage.convert({
-  fields: ['devDependencies', 'lint-staged', 'config'],
-  scripts: {
-    'start': 'node index.js'
-  }
-});
+export default new ProdPackageJson()

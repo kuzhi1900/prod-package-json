@@ -1,6 +1,6 @@
 {
   "name": "prod-package-json",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/kuzhi1900/prod-package-json"
@@ -16,6 +16,5 @@
   "module": "index.js",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
   }
 }
