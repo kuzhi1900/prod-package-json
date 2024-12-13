@@ -5,6 +5,8 @@
     "type": "git",
     "url": "https://github.com/kuzhi1900/prod-package-json"
   },
+  "description": "A tool for managing production-level package.json files",
+  "main": "index.js",
   "keywords": [
     "prod",
     "production",
